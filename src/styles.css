@@ -1,0 +1,160 @@
+/* Josh's Custom CSS Reset https://www.joshwcomeau.com/css/custom-css-reset/ */
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        interpolate-size: allow-keywords;
+    }
+}
+
+body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+}
+
+input, button, textarea, select {
+    font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: break-word;
+}
+
+p {
+    text-wrap: pretty;
+}
+h1, h2, h3, h4, h5, h6 {
+    text-wrap: balance;
+}
+
+#root, #__next {
+    isolation: isolate;
+}
+
+body {
+    --text-color: #ffffff;
+    --terciary-color: #000000;
+    --scd-color: #FAEB92;
+    --primary-color: #9929EA;
+    --bg-color: #CC66DA;
+    font-family: sans-serif;
+    min-height: 100dvh;
+    background-color: #ededed;
+    overflow: hidden;
+}
+
+.header {
+    background-color: var(--terciary-color);
+    color: var(--text-color);
+    gap: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+}
+
+.header__logo {
+    width: 50px;
+}
+
+.header__title {
+    font-size: 2.5rem;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    min-height: calc(100dvh - 100px - 48.8px);
+    margin-bottom: 48.8px;
+}
+
+.sidebar {
+    min-width: 250px;
+    width: 300px;
+    background-color: var(--primary-color);
+    padding: 20px;
+}
+
+.sidebar__list, .projects__list {
+    list-style: none;
+}
+
+.sidebar__btn {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    border: none;
+    background-color: transparent;
+    gap: 15px;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: var(--text-color);
+}
+
+.sidebar__btn:is(:active,:hover), .active {
+    background-color: var(--scd-color);
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.btn__svg {
+    max-width: 25px;
+    fill: var(--text-color);
+}
+
+.sidebar__btn:is(:active,:hover) .btn__svg, .active .btn__svg {
+    fill: var(--primary-color);
+}
+
+.projects__title {
+    padding: 10px;
+    font-size: 1.5rem;
+}
+
+.add-project-btn {
+    margin: 10px 0 0 3px;
+}
+
+.add-project-btn:is(:active,:hover) {
+    background-color: var(--bg-color);
+    color: var(--scd-color);
+}
+
+.add-project-btn::before{
+    content: '+';
+    font-weight: bold;
+}
+
+.main {
+    width: 900px;
+    margin: 0 auto;
+    padding: 20px 40px;
+    background-color: var(--scd-color);
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #333;
+    width: 100%;
+    color: #ededed;
+    font-size: 1.2rem;
+    padding: 10px;
+}

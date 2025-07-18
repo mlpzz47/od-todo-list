@@ -91,7 +91,7 @@ body {
     list-style: none;
 }
 
-.sidebar__btn {
+.sidebar__btn, .add-btn {
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -129,12 +129,12 @@ body {
     margin: 10px 0 0 3px;
 }
 
-.add-project-btn:is(:active,:hover) {
+.add-btn:is(:active,:hover) {
     background-color: var(--bg-color);
     color: var(--scd-color);
 }
 
-.add-project-btn::before{
+.add-btn::before{
     content: '+';
     font-weight: bold;
 }
@@ -144,6 +144,32 @@ body {
     margin: 0 auto;
     padding: 20px 40px;
     background-color: var(--scd-color);
+}
+
+.main__title {
+    font-weight: bold;
+    color: var(--terciary-color);
+    text-transform: capitalize;
+    font-size: 1.8rem;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.add-task {
+    color: var(--terciary-color);
+}
+
+#add-task-form {
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas:
+        "input input"
+        "add cancel";
+}
+
+.input-task-name {
+    grid-area: input;
 }
 
 .footer {

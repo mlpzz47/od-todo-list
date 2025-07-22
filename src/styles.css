@@ -166,10 +166,25 @@ body {
     grid-template-areas:
         "input input"
         "add cancel";
+    gap: 10px;
 }
 
 .input-task-name {
     grid-area: input;
+    padding: 4px 10px;
+}
+
+.input-btn {
+    padding: 5px;
+    color: #fff;
+}
+
+#input-add-task-btn {
+    background-color: #383;
+}
+
+#cancel-btn {
+    background-color: #a33;
 }
 
 .footer {

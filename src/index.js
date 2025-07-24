@@ -1,5 +1,5 @@
 import "./styles.css";
-import { showInbox } from "./inbox.js";
+import { inboxArray, showInbox } from "./inbox.js";
 
 
 const inboxBtn = document.getElementById('inbox-btn');

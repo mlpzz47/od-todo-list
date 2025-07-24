@@ -53,9 +53,25 @@ const showInbox = ()=> {
                 </div>
             `;
             content.appendChild(taskContainer);
+
+            const deleteTaskBtn = taskContainer.querySelector('.task-btn');
+            deleteTaskBtn.addEventListener('click', ()=>{
+                taskContainer.remove();
+            })
+
+            const checkTaskBtn = taskContainer.querySelector('.task-checkbox');
+            checkTaskBtn.addEventListener('click', ()=>{
+                setTimeout(()=> {
+                    alert('task completed!!! now goon');
+                }, 3000)
+                taskContainer.remove();
+            })
+
+
             addTaskForm.remove();
             addTaskBtn.style.display = 'flex';
         })
+
 
         addTaskForm.querySelector('#cancel-btn').addEventListener('click', ()=>{
             addTaskForm.remove();

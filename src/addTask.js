@@ -15,7 +15,7 @@ export default function createTask () {
         const addTaskForm = document.createElement('form');
         addTaskForm.id = 'add-task-form';
         addTaskForm.innerHTML = `
-            <input type="text" class="input-task-name" value='' placeholder="Task Name...">
+            <input type="text" class="input-task-name" value='' placeholder="Task Name..." minlenght='1'>
             <button type="submit" class="input-btn" id="input-add-task-btn">Add</button>
             <button type="button" class="input-btn" id="cancel-btn">Cancel</button>
         `;
@@ -25,9 +25,11 @@ export default function createTask () {
 
         inputAddTaskBtn.addEventListener('click', (e)=>{
             e.preventDefault();
+
             const taskName = addTaskForm.querySelector('.input-task-name').value.trim();
             const task = new taskStructure(taskName);
             const taskContainer = document.createElement('div');
+            taskContainer.id = crypto.randomUUID;
             taskContainer.classList.add('task');
             taskContainer.innerHTML = `
                 <div class="left-panel">
@@ -46,13 +48,11 @@ export default function createTask () {
                 taskContainer.remove();
             })
 
+
             const checkTaskBtn = taskContainer.querySelector('.task-checkbox');
             checkTaskBtn.addEventListener('click', ()=>{
-                setTimeout(()=> {
-                    alert('task completed!!! now goon');
-                    taskContainer.remove();
-                }, 1000)
-                
+                alert('task completed!!! now goon');
+                taskContainer.remove();
             })
 
             addTaskForm.remove();

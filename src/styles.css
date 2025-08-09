@@ -45,11 +45,16 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 body {
-    --text-color: #ffffff;
+    /* --text-color: #ffffff;
     --terciary-color: #000000;
     --scd-color: #FAEB92;
     --primary-color: #9929EA;
-    --bg-color: #CC66DA;
+    --bg-color: #CC66DA; */
+    --text-color: #ffffff;
+    --terciary-color: #000000;
+    --scd-color: #eae9df;
+    --primary-color: #6e6375;
+    --bg-color: #beacc0;
     font-family: sans-serif;
     min-height: 100dvh;
     background-color: #ededed;

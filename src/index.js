@@ -29,12 +29,3 @@ inboxBtn.addEventListener('click', ()=>{
     inboxBtn.classList.add('active');
     showInbox();
 });
-
-// const projects = createProject.querySelectorAll('.project');
-
-// projects.forEach((project)=>{
-//     project.addEventListener('click', ()=>{
-//         project.classList.add('active');
-//         showProject();
-//     })
-// })

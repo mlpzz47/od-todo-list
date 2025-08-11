@@ -1,6 +1,6 @@
 import "./styles.css";
 import { showInbox } from "./inbox.js";
-import { createProject } from "./projects.js";
+import { projectManager } from "./projects.js";
 // import { createProject } from "./projects.js"
 
 
@@ -22,8 +22,7 @@ export { mainTitle, content, addTaskBtn, addTaskContainer, addProjectBtn, addPro
 
 inboxBtn.classList.add('active');
 showInbox();
-
-createProject();
+projectManager();
 
 inboxBtn.addEventListener('click', ()=>{
     inboxBtn.classList.add('active');

@@ -15,7 +15,7 @@ export default function createTask () {
         const addTaskForm = document.createElement('form');
         addTaskForm.id = 'add-task-form';
         addTaskForm.innerHTML = `
-            <input type="text" class="input-task-name" value='' placeholder="Task Name..." minlenght='1'>
+            <input type="text" class="input-task-name" value='' placeholder="Task Name...">
             <button type="submit" class="input-btn" id="input-add-task-btn">Add</button>
             <button type="button" class="input-btn" id="cancel-btn">Cancel</button>
         `;

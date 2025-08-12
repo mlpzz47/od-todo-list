@@ -1,12 +1,18 @@
-import { mainTitle, content } from './index.js';
-import createTask from './addTask.js';
+import { mainTitle, content, inboxBtn } from './index.js';
+import taskManager from './addTask.js';
 
 let inboxArray = [];
 
 const showInbox = ()=> {
-    mainTitle.textContent = 'inbox';
+    const isActive = document.querySelectorAll('.active');
+    isActive.forEach((activeElement) => activeElement.classList.remove('active'));
+    inboxBtn.classList.add('active');
+    mainTitle.textContent = 'Inbox';
     content.innerHTML = '';
-    createTask();
+    for (let i = 0; i < inboxArray.length; i++) {
+        content.appendChild(inboxArray[i].element);
+    }
+    taskManager(inboxArray);
 }
 
-export { showInbox, inboxArray };
+export { showInbox };

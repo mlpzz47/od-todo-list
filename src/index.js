@@ -1,8 +1,7 @@
 import "./styles.css";
 import { showInbox } from "./inbox.js";
-import { projectManager } from "./projects.js";
-// import { createProject } from "./projects.js"
-
+import projectManager from "./projects.js";
+import taskManager from "./addTask.js";
 
 const mainTitle = document.querySelector('.main__title');
 const content = document.querySelector('.content');
@@ -18,13 +17,13 @@ const addProjectContainer = document.querySelector('.add-project-container');
 const addTaskBtn = document.querySelector('.add-task');
 const addTaskContainer = document.querySelector('.add-task-container');
 
-export { mainTitle, content, addTaskBtn, addTaskContainer, addProjectBtn, addProjectContainer, projectsList };
+export { mainTitle, content, addTaskBtn, addTaskContainer, addProjectBtn, addProjectContainer, projectsList, inboxBtn };
 
 inboxBtn.classList.add('active');
 showInbox();
 projectManager();
 
 inboxBtn.addEventListener('click', ()=>{
-    inboxBtn.classList.add('active');
+    if (inboxBtn.classList.contains('active')) return;
     showInbox();
 });

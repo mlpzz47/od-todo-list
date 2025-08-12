@@ -1,11 +1,13 @@
-import { addProjectBtn, projectsList, addProjectContainer } from './index.js';
+import { addProjectBtn, projectsList, addProjectContainer, mainTitle, content } from './index.js';
+import taskManager from './addTask.js';
 
 let projectsArray = [];
 
-function projectManager () {
+export default function projectManager () {
+
+    addProjectBtn.addEventListener('click', ()=>{showProjectForm()})
 
     function showProjectForm () {
-
         addProjectBtn.style.display = 'none';
 
         const addProjectForm = document.createElement('form');
@@ -28,23 +30,23 @@ function projectManager () {
 
             const projectId = crypto.randomUUID();
             const project = createProject(projectName, projectId);
-            projectsArray.push({ name: projectName, id: projectId, element: project});
-            projectsList.appendChild(project);
-            
+            let projectTaskArray = [];
+            projectsArray.push({ name: projectName, id: projectId, element: project, taskArray: projectTaskArray});
             console.log(projectsArray);
+            projectsList.appendChild(project);
+
 
             addProjectForm.remove();
             addProjectBtn.style.display = 'flex';
-
         })
-        
-        
+
         addProjectForm.querySelector('#cancel-btn').addEventListener('click', ()=>{
             addProjectForm.remove();
             addProjectBtn.style.display = 'flex';
         })
     }
-    
+
+
     function createProject (name, id) {
         const projectContainer = document.createElement('li');
         projectContainer.classList.add('project');
@@ -56,7 +58,6 @@ function projectManager () {
             <span class="delete-project-btn">x</span>
             </button>
         `;
-        
         const deleteProjectBtn = projectContainer.querySelector('.delete-project-btn');
         deleteProjectBtn.id = id;
         deleteProjectBtn.addEventListener('click', ()=>{
@@ -64,13 +65,26 @@ function projectManager () {
             projectContainer.remove();
             console.log(projectsArray);
         })
-        
+
+        const projectBtn = projectContainer.querySelector('.project__btn');
+        projectBtn.addEventListener('click', ()=>{
+            if (projectBtn.classList.contains('active')) return;
+            projectBtn.classList.add('active');
+            showProject(id);
+        })
+
         return projectContainer;
     }
 
-    addProjectBtn.addEventListener('click', ()=> {showProjectForm()})
+    function showProject (projectId) {
+        const project = projectsArray.find((project) => project.id === projectId);
+        const isActive = document.querySelectorAll('.active');
+        isActive.forEach((activeElement) => activeElement.classList.remove('active'));
+        mainTitle.textContent = project.name;
+        content.innerHTML = '';
+        for (let i = 0; i < project.taskArray.length; i++) {
+            content.appendChild(project.taskArray[i].element);
+        }
+        taskManager(project.taskArray);
+    }
 }
-
-
-
-export { projectManager };

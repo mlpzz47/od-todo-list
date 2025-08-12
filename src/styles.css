@@ -101,6 +101,10 @@ body {
     list-style: none;
 }
 
+.sidebar__btn {
+    margin: 3px 0;
+}
+
 .sidebar__btn, .add-btn {
     width: 100%;
     display: flex;
@@ -176,7 +180,6 @@ body {
 .main__title {
     font-weight: bold;
     color: var(--terciary-color);
-    text-transform: capitalize;
     font-size: 1.8rem;
     padding: 10px;
     margin-bottom: 10px;

@@ -1,10 +1,10 @@
 import { addTaskBtn, addTaskContainer, content } from './index.js';
 
-export default function taskManager (procedence) {
+export default function taskManager (activeTaskArray) {
 
-    function showTaskForm () {
+    function showTaskForm (activeTaskArray) {
         addTaskBtn.style.display = 'none';
-
+        
         const addTaskForm = document.createElement('form');
         addTaskForm.id = 'add-task-form';
         addTaskForm.innerHTML = `
@@ -19,7 +19,7 @@ export default function taskManager (procedence) {
             addTaskForm.remove();
             addTaskBtn.style.display = 'flex';
         })
-    
+        
         const inputAddTaskBtn = addTaskForm.querySelector('#input-add-task-btn');
         inputAddTaskBtn.addEventListener('click', (e)=>{
             e.preventDefault();
@@ -31,11 +31,11 @@ export default function taskManager (procedence) {
             
             const taskId = crypto.randomUUID();
             const task = createTask(taskName, taskId);
-            procedence.push({ name: taskName, id: taskId, element: task});
-            console.log(procedence);
-
+            activeTaskArray.push({ name: taskName, id: taskId, element: task});
+            console.log(activeTaskArray);
+            
             content.appendChild(task);
-
+            
             addTaskForm.remove();
             addTaskBtn.style.display = 'flex';
         })
@@ -48,35 +48,36 @@ export default function taskManager (procedence) {
         taskContainer.classList.add('task');
         taskContainer.innerHTML = `
             <div class="left-panel">
-                <input type="radio" class="task-checkbox">
-                <p class="task-name">${name}</p>
+            <input type="radio" class="task-checkbox">
+            <p class="task-name">${name}</p>
             </div>
             <div class="right-panel">
-                <p class="task-duedate">No Date</p>
-                <button type="button" class="task-btn">x</button>
+            <p class="task-duedate">No Date</p>
+            <button type="button" class="task-btn">x</button>
             </div>
         `;
-    
+        
         const deleteTaskBtn = taskContainer.querySelector('.task-btn');
         deleteTaskBtn.id = id;
         deleteTaskBtn.addEventListener('click', ()=>{
             taskContainer.remove();
-            procedence = procedence.filter((task) => task.id != id);
-            console.log(procedence);
+            activeTaskArray = activeTaskArray.filter((task) => task.id != id);
+            console.log(activeTaskArray);
         })
-    
-    
+        
+        
         const checkTaskBtn = taskContainer.querySelector('.task-checkbox');
         checkTaskBtn.id = id;
         checkTaskBtn.addEventListener('click', ()=>{
             alert('task completed!!! now goon');
             taskContainer.remove();
-            procedence = procedence.filter((task) => task.id != id);
-            console.log(procedence);
+            activeTaskArray = activeTaskArray.filter((task) => task.id != id);
+            console.log(activeTaskArray);
         })
-
+        
         return taskContainer;
     }
 
-    addTaskBtn.addEventListener('click', ()=>{showTaskForm()})
+    addTaskBtn.addEventListener('click', ()=>{showTaskForm(activeTaskArray)});
+
 }

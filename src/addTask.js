@@ -1,5 +1,7 @@
 import { addTaskBtn, addTaskContainer, content } from './index.js';
 
+let taskBtnManager = null;
+
 export default function taskManager (activeTaskArray) {
 
     function showTaskForm (activeTaskArray) {
@@ -8,9 +10,9 @@ export default function taskManager (activeTaskArray) {
         const addTaskForm = document.createElement('form');
         addTaskForm.id = 'add-task-form';
         addTaskForm.innerHTML = `
-            <input type="text" class="input-task-name" value='' placeholder="Task Name...">
-            <button type="submit" class="input-btn" id="input-add-task-btn">Add</button>
-            <button type="button" class="input-btn" id="cancel-btn">Cancel</button>
+        <input type="text" class="input-task-name" value='' placeholder="Task Name...">
+        <button type="submit" class="input-btn" id="input-add-task-btn">Add</button>
+        <button type="button" class="input-btn" id="cancel-btn">Cancel</button>
         `;
         addTaskContainer.appendChild(addTaskForm);
         
@@ -47,14 +49,14 @@ export default function taskManager (activeTaskArray) {
         taskContainer.id = id;
         taskContainer.classList.add('task');
         taskContainer.innerHTML = `
-            <div class="left-panel">
-            <input type="radio" class="task-checkbox">
-            <p class="task-name">${name}</p>
-            </div>
-            <div class="right-panel">
-            <p class="task-duedate">No Date</p>
-            <button type="button" class="task-btn">x</button>
-            </div>
+        <div class="left-panel">
+        <input type="radio" class="task-checkbox">
+        <p class="task-name">${name}</p>
+        </div>
+        <div class="right-panel">
+        <p class="task-duedate">No Date</p>
+        <button type="button" class="task-btn">x</button>
+        </div>
         `;
         
         const deleteTaskBtn = taskContainer.querySelector('.task-btn');
@@ -78,6 +80,13 @@ export default function taskManager (activeTaskArray) {
         return taskContainer;
     }
 
-    addTaskBtn.addEventListener('click', ()=>{showTaskForm(activeTaskArray)});
+    if (taskBtnManager) {
+        addTaskBtn.removeEventListener('click', taskBtnManager);
+    }
+
+    taskBtnManager = () => showTaskForm(activeTaskArray);
+
+    addTaskBtn.addEventListener('click', taskBtnManager);
+
 
 }

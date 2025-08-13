@@ -31,7 +31,7 @@ export default function projectManager () {
             const projectId = crypto.randomUUID();
             const project = createProject(projectName, projectId);
             let projectTaskArray = [];
-            projectsArray.push({ name: projectName, id: projectId, element: project, taskArray: projectTaskArray});
+            projectsArray.push({name: projectName, id: projectId, element: project, taskArray: projectTaskArray});
             taskManager(projectTaskArray);
             console.log(projectsArray);
             projectsList.appendChild(project);
@@ -80,6 +80,7 @@ export default function projectManager () {
     
     function showProject (projectId) {
         const project = projectsArray.find((project) => project.id === projectId);
+        if (!project) return;
         const isActive = document.querySelectorAll('.active');
         isActive.forEach((activeElement) => activeElement.classList.remove('active'));
         mainTitle.textContent = project.name;

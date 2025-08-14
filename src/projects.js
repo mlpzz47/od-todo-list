@@ -1,7 +1,9 @@
 import { addProjectBtn, projectsList, addProjectContainer, mainTitle, content } from './index.js';
 import taskManager from './addTask.js';
+import { showInbox } from './inbox.js';
 
 let projectsArray = [];
+let taskArrays = {};
 
 export default function projectManager () {
 
@@ -30,10 +32,17 @@ export default function projectManager () {
 
             const projectId = crypto.randomUUID();
             const project = createProject(projectName, projectId);
-            let projectTaskArray = [];
+
+            function createTaskArray (name) {
+                taskArrays[name + 'Array'] = [];
+                return taskArrays[name + 'Array'];
+            }
+            const projectTaskArray = createTaskArray(projectName);
+            console.log(taskArrays);
+
             projectsArray.push({name: projectName, id: projectId, element: project, taskArray: projectTaskArray});
             taskManager(projectTaskArray);
-            console.log(projectsArray);
+            console.log(projectTaskArray);
             projectsList.appendChild(project);
             
 
@@ -63,16 +72,19 @@ export default function projectManager () {
         const deleteProjectBtn = projectContainer.querySelector('.delete-project-btn');
         deleteProjectBtn.id = id;
         deleteProjectBtn.addEventListener('click', ()=>{
+            if (projectBtn.classList.contains('active')) showInbox();
             projectsArray = projectsArray.filter((project) => project.id !== id);
+            delete taskArrays[name + 'Array'];
             projectContainer.remove();
+            console.log(taskArrays);
             console.log(projectsArray);
         })
         
         const projectBtn = projectContainer.querySelector('.project__btn');
         projectBtn.addEventListener('click', ()=>{
             if (projectBtn.classList.contains('active')) return;
-            projectBtn.classList.add('active');
             showProject(id);
+            projectBtn.classList.add('active');
         })
         
         return projectContainer;

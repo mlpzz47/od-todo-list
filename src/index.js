@@ -1,7 +1,6 @@
 import "./styles.css";
-import { showInbox, inboxArray } from "./inbox.js";
+import { showInbox } from "./inbox.js";
 import projectManager from "./projects.js";
-import taskManager from "./addTask.js";
 
 const mainTitle = document.querySelector('.main__title');
 const content = document.querySelector('.content');
@@ -21,7 +20,6 @@ export { mainTitle, content, addTaskBtn, addTaskContainer, addProjectBtn, addPro
 
 inboxBtn.classList.add('active');
 showInbox();
-taskManager(inboxArray);
 
 projectManager();
 

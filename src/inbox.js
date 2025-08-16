@@ -1,4 +1,5 @@
 import { mainTitle, content, inboxBtn } from './index.js';
+import taskManager from './addTask.js';
 
 let inboxArray = [];
 
@@ -8,6 +9,7 @@ const showInbox = ()=> {
     inboxBtn.classList.add('active');
     mainTitle.textContent = 'Inbox';
     content.innerHTML = '';
+    taskManager(inboxArray);
     for (let i = 0; i < inboxArray.length; i++) {
         content.appendChild(inboxArray[i].element);
     }

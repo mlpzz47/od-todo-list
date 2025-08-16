@@ -30,22 +30,21 @@ export default function projectManager () {
                 return;
             }
 
-            const projectId = crypto.randomUUID();
-            const project = createProject(projectName, projectId);
-
             function createTaskArray (name) {
                 taskArrays[name + 'Array'] = [];
                 return taskArrays[name + 'Array'];
             }
             const projectTaskArray = createTaskArray(projectName);
+
+            const projectId = crypto.randomUUID();
+            const project = createProject(projectName, projectId, projectTaskArray);
+
             console.log(taskArrays);
 
             projectsArray.push({name: projectName, id: projectId, element: project, taskArray: projectTaskArray});
-            taskManager(projectTaskArray);
             console.log(projectTaskArray);
             projectsList.appendChild(project);
             
-
             addProjectForm.remove();
             addProjectBtn.style.display = 'flex';
         })
@@ -55,9 +54,9 @@ export default function projectManager () {
             addProjectBtn.style.display = 'flex';
         })
     }
-
-
-    function createProject (name, id) {
+    
+    
+    function createProject (name, id, array) {
         const projectContainer = document.createElement('li');
         projectContainer.classList.add('project');
         projectContainer.id = id;
@@ -83,6 +82,7 @@ export default function projectManager () {
         const projectBtn = projectContainer.querySelector('.project__btn');
         projectBtn.addEventListener('click', ()=>{
             if (projectBtn.classList.contains('active')) return;
+            taskManager(array);
             showProject(id);
             projectBtn.classList.add('active');
         })

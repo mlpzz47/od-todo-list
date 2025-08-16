@@ -6,7 +6,7 @@ export default function taskManager (activeTaskArray) {
 
     function showTaskForm (activeTaskArray) {
         addTaskBtn.style.display = 'none';
-        
+
         const addTaskForm = document.createElement('form');
         addTaskForm.id = 'add-task-form';
         addTaskForm.innerHTML = `
@@ -15,8 +15,7 @@ export default function taskManager (activeTaskArray) {
         <button type="button" class="input-btn" id="cancel-btn">Cancel</button>
         `;
         addTaskContainer.appendChild(addTaskForm);
-        
-        
+
         addTaskForm.querySelector('#cancel-btn').addEventListener('click', ()=>{
             addTaskForm.remove();
             addTaskBtn.style.display = 'flex';
@@ -63,17 +62,18 @@ export default function taskManager (activeTaskArray) {
         deleteTaskBtn.id = id;
         deleteTaskBtn.addEventListener('click', ()=>{
             taskContainer.remove();
-            activeTaskArray = activeTaskArray.filter((task) => task.id != id);
+            const deletedTaskIndex = activeTaskArray.findIndex((task) => task.id === id);
+            activeTaskArray.splice(deletedTaskIndex, 1);
             console.log(activeTaskArray);
         })
-        
-        
+
         const checkTaskBtn = taskContainer.querySelector('.task-checkbox');
         checkTaskBtn.id = id;
         checkTaskBtn.addEventListener('click', ()=>{
             alert('task completed!!! now goon');
             taskContainer.remove();
-            activeTaskArray = activeTaskArray.filter((task) => task.id != id);
+            const deletedTaskIndex = activeTaskArray.findIndex((task) => task.id === id);
+            activeTaskArray.splice(deletedTaskIndex, 1);
             console.log(activeTaskArray);
         })
         

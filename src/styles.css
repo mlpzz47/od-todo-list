@@ -46,6 +46,11 @@ h1, h2, h3, h4, h5, h6 {
 
 body {
     /* --text-color: #ffffff;
+    --terciary-color: #353535;
+    --scd-color: #3c6e71;
+    --primary-color: #284b63;
+    --bg-color: #d9d9d9; */
+    /* --text-color: #ffffff;
     --terciary-color: #000000;
     --scd-color: #FAEB92;
     --primary-color: #9929EA;
@@ -58,7 +63,6 @@ body {
     font-family: sans-serif;
     min-height: 100dvh;
     background-color: #ededed;
-    overflow: hidden;
 }
 
 /* ----- HEADER SECTION ----- */
@@ -85,7 +89,6 @@ body {
     display: flex;
     flex-direction: row;
     min-height: calc(100dvh - 100px - 48.8px);
-    margin-bottom: 48.8px;
 }
 
 /* ----- SIDEBAR SECTION ----- */
@@ -209,11 +212,11 @@ body {
     color: #fff;
 }
 
-#input-add-task-btn, #input-add-project-btn  {
+#input-add-task-btn, #input-add-project-btn, #input-add-date  {
     background-color: #383;
 }
 
-#cancel-btn {
+#cancel-btn, #cancel-date {
     background-color: #a33;
 }
 
@@ -237,10 +240,25 @@ body {
     color: var(--text-color);
 }
 
+.task-duedate, .task-btn, .task-checkbox {
+    cursor: pointer;
+}
+
+.task-btn {
+    background-color: transparent;
+    border: none;
+    color: var(--terciary-color);
+}
+
+.task:hover .task-btn {
+    color: var(--text-color);
+}
+
+
 /* ----- FOOTER SECTION ----- */
 
 .footer {
-    position: absolute;
+    position: sticky;
     bottom: 0;
     display: flex;
     align-items: center;

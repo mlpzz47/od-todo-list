@@ -16,7 +16,7 @@ const addProjectContainer = document.querySelector('.add-project-container');
 const addTaskBtn = document.querySelector('.add-task');
 const addTaskContainer = document.querySelector('.add-task-container');
 
-export { mainTitle, content, addTaskBtn, addTaskContainer, addProjectBtn, addProjectContainer, projectsList, inboxBtn };
+export { mainTitle, content, addTaskBtn, addTaskContainer, addProjectBtn, addProjectContainer, projectsList, inboxBtn, todayBtn, thisWeekBtn };
 
 inboxBtn.classList.add('active');
 showInbox();

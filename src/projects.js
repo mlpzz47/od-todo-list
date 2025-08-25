@@ -71,12 +71,20 @@ export default function projectManager () {
         const deleteProjectBtn = projectContainer.querySelector('.delete-project-btn');
         deleteProjectBtn.id = id;
         deleteProjectBtn.addEventListener('click', ()=>{
-            if (projectBtn.classList.contains('active')) showInbox();
-            projectsArray = projectsArray.filter((project) => project.id !== id);
-            delete taskArrays[name + 'Array'];
-            projectContainer.remove();
-            console.log(taskArrays);
-            console.log(projectsArray);
+            if (projectBtn.classList.contains('active')) {
+                projectsArray = projectsArray.filter((project) => project.id !== id);
+                delete taskArrays[name + 'Array'];
+                projectContainer.remove();
+                console.log(taskArrays);
+                console.log(projectsArray);
+                showInbox();
+            } else {
+                projectsArray = projectsArray.filter((project) => project.id !== id);
+                delete taskArrays[name + 'Array'];
+                projectContainer.remove();
+                console.log(taskArrays);
+                console.log(projectsArray);
+            }
         })
         
         const projectBtn = projectContainer.querySelector('.project__btn');
@@ -86,10 +94,10 @@ export default function projectManager () {
             showProject(id);
             projectBtn.classList.add('active');
         })
-        
+
         return projectContainer;
     }
-    
+
     function showProject (projectId) {
         const project = projectsArray.find((project) => project.id === projectId);
         if (!project) return;

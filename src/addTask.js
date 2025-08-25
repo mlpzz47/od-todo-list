@@ -1,4 +1,5 @@
 import { addTaskBtn, addTaskContainer, content } from './index.js';
+import { format } from 'date-fns';
 
 let taskBtnManager = null;
 
@@ -49,12 +50,12 @@ export default function taskManager (activeTaskArray) {
         taskContainer.classList.add('task');
         taskContainer.innerHTML = `
         <div class="left-panel">
-        <input type="radio" class="task-checkbox">
-        <p class="task-name">${name}</p>
+            <input type="radio" class="task-checkbox">
+            <p class="task-name">${name}</p>
         </div>
         <div class="right-panel">
-        <p class="task-duedate">No Date</p>
-        <button type="button" class="task-btn">x</button>
+            <p class="task-duedate">No Date</p>
+            <button type="button" class="task-btn">x</button>
         </div>
         `;
         
@@ -77,7 +78,43 @@ export default function taskManager (activeTaskArray) {
             console.log(activeTaskArray);
         })
         
+        const taskDueDate = taskContainer.querySelector('.task-duedate');
+        const rightPanel = taskContainer.querySelector('.right-panel');
+        taskDueDate.addEventListener('click', ()=> {assignDueDate(rightPanel, taskDueDate)})
+
         return taskContainer;
+    }
+
+    function assignDueDate(fatherNode, node) {
+        const assignDateForm = document.createElement('form');
+        assignDateForm.id = 'assign-date-form';
+        assignDateForm.innerHTML = `
+        <input type="date" class="input-task-date" value=''>
+        <button type="submit" class="input-btn" id="input-add-date">Add</button>
+        <button type="button" class="input-btn" id="cancel-date">Cancel</button>
+        `;
+        fatherNode.replaceChild(assignDateForm, node);
+
+        assignDateForm.querySelector('#cancel-date').addEventListener('click', ()=>{
+            fatherNode.replaceChild(node, assignDateForm);
+            assignDateForm.remove();
+        })
+        
+        const inputAddDate = assignDateForm.querySelector('#input-add-date');
+        inputAddDate.addEventListener('click', (e)=>{
+            e.preventDefault();
+            const taskDate = assignDateForm.querySelector('.input-task-date').value.trim();
+            if (!taskDate) {
+                alert('Project Date cannot be empty');
+                return;
+            }
+
+            const goodTaskDate = format(new Date(taskDate), 'dd MMM yyyy' )
+            node.textContent = goodTaskDate;
+
+            fatherNode.replaceChild(node, assignDateForm);
+            assignDateForm.remove();
+        })
     }
 
     if (taskBtnManager) {

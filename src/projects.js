@@ -1,11 +1,10 @@
-import { addProjectBtn, projectsList, addProjectContainer, mainTitle, content } from './index.js';
+import { addProjectBtn, projectsList, addProjectContainer, mainTitle, content, addTaskContainer } from './index.js';
 import taskManager from './addTask.js';
 import { showInbox } from './inbox.js';
 
 let projectsArray = [];
-let taskArrays = {};
 
-export default function projectManager () {
+function projectManager () {
 
     addProjectBtn.addEventListener('click', ()=>{showProjectForm()})
 
@@ -30,21 +29,20 @@ export default function projectManager () {
                 return;
             }
 
-            function createTaskArray (name) {
-                taskArrays[name + 'Array'] = [];
-                return taskArrays[name + 'Array'];
-            }
-            const projectTaskArray = createTaskArray(projectName);
-
+            const projectTaskArray = [];
             const projectId = crypto.randomUUID();
             const project = createProject(projectName, projectId, projectTaskArray);
 
-            console.log(taskArrays);
-
-            projectsArray.push({name: projectName, id: projectId, element: project, taskArray: projectTaskArray});
+            projectsArray.push({
+                name: projectName,
+                id: projectId,
+                element: project,
+                taskArray: projectTaskArray
+            });
             console.log(projectTaskArray);
+            console.log(projectsArray);
+
             projectsList.appendChild(project);
-            
             addProjectForm.remove();
             addProjectBtn.style.display = 'flex';
         })
@@ -73,16 +71,12 @@ export default function projectManager () {
         deleteProjectBtn.addEventListener('click', ()=>{
             if (projectBtn.classList.contains('active')) {
                 projectsArray = projectsArray.filter((project) => project.id !== id);
-                delete taskArrays[name + 'Array'];
                 projectContainer.remove();
-                console.log(taskArrays);
                 console.log(projectsArray);
                 showInbox();
             } else {
                 projectsArray = projectsArray.filter((project) => project.id !== id);
-                delete taskArrays[name + 'Array'];
                 projectContainer.remove();
-                console.log(taskArrays);
                 console.log(projectsArray);
             }
         })
@@ -108,5 +102,10 @@ export default function projectManager () {
         for (let i = 0; i < project.taskArray.length; i++) {
             content.appendChild(project.taskArray[i].element);
         }
+        if (addTaskContainer.style.display !== 'block') {
+                addTaskContainer.style.display = 'block';
+        }
     }
 }
+
+export { projectManager, projectsArray}

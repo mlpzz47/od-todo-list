@@ -33,7 +33,7 @@ export default function taskManager (activeTaskArray) {
             
             const taskId = crypto.randomUUID();
             const task = createTask(taskName, taskId);
-            activeTaskArray.push({ name: taskName, id: taskId, element: task});
+            activeTaskArray.push({ name: taskName, id: taskId, element: task, dueDate: null});
             console.log(activeTaskArray);
             
             content.appendChild(task);
@@ -80,12 +80,12 @@ export default function taskManager (activeTaskArray) {
         
         const taskDueDate = taskContainer.querySelector('.task-duedate');
         const rightPanel = taskContainer.querySelector('.right-panel');
-        taskDueDate.addEventListener('click', ()=> {assignDueDate(rightPanel, taskDueDate)})
+        taskDueDate.addEventListener('click', ()=> {assignDueDate(rightPanel, taskDueDate, id)})
 
         return taskContainer;
     }
 
-    function assignDueDate(fatherNode, node) {
+    function assignDueDate(fatherNode, node, id) {
         const assignDateForm = document.createElement('form');
         assignDateForm.id = 'assign-date-form';
         assignDateForm.innerHTML = `
@@ -111,6 +111,9 @@ export default function taskManager (activeTaskArray) {
 
             const goodTaskDate = format(new Date(taskDate), 'dd MMM yyyy' )
             node.textContent = goodTaskDate;
+
+            const taskReferred = activeTaskArray.find(task => task.id === id)
+            taskReferred.dueDate = goodTaskDate;
 
             fatherNode.replaceChild(node, assignDateForm);
             assignDateForm.remove();

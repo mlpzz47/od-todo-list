@@ -55,7 +55,7 @@ export default function taskManager (activeTaskArray) {
         </div>
         <div class="right-panel">
             <p class="task-duedate">No Date</p>
-            <button type="button" class="task-btn">x</button>
+            <button type="button" class="task-btn"><span class="task-btn-text">x</span></button>
         </div>
         `;
         
@@ -71,7 +71,7 @@ export default function taskManager (activeTaskArray) {
         const checkTaskBtn = taskContainer.querySelector('.task-checkbox');
         checkTaskBtn.id = id;
         checkTaskBtn.addEventListener('click', ()=>{
-            alert('task completed!!! now goon');
+            alert('Task completed!!! Now goon');
             taskContainer.remove();
             const deletedTaskIndex = activeTaskArray.findIndex((task) => task.id === id);
             activeTaskArray.splice(deletedTaskIndex, 1);

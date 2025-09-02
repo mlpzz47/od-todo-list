@@ -45,21 +45,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 body {
-    /* --text-color: #ffffff;
-    --terciary-color: #353535;
-    --scd-color: #3c6e71;
-    --primary-color: #284b63;
-    --bg-color: #d9d9d9; */
-    /* --text-color: #ffffff;
-    --terciary-color: #000000;
-    --scd-color: #FAEB92;
-    --primary-color: #9929EA;
-    --bg-color: #CC66DA; */
     --text-color: #ffffff;
     --terciary-color: #000000;
-    --scd-color: #eae9df;
-    --primary-color: #6e6375;
-    --bg-color: #beacc0;
+    --scd-color: #fca311;
+    --primary-color: #14213d;
+    --bg-color: #e5e5e5;
     font-family: sans-serif;
     min-height: 100dvh;
     background-color: #ededed;
@@ -148,7 +138,7 @@ body {
 
 .add-btn:is(:active,:hover) {
     background-color: var(--bg-color);
-    color: var(--scd-color);
+    color: var(--primary-color);
 }
 
 .add-btn::before{
@@ -224,7 +214,7 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 10px 20px;
+    padding: 15px 20px;
     border-radius: 5px;
 }
 
@@ -247,6 +237,23 @@ body {
 .task-btn {
     background-color: transparent;
     border: none;
+    color: var(--terciary-color);
+    aspect-ratio: 1 / 1;
+    padding: 3px 8px;
+    border-radius: 50%;
+}
+
+.task-btn:is(:hover, :active, :focus) .task-btn-text {
+    color: var(--terciary-color);
+}
+
+.task-duedate {
+    padding: 3px 10px;
+    border-radius: 3px;
+}
+
+.task-btn:is(:hover, :active, :focus), .task-duedate:is(:hover, :active, :focus) {
+    background-color: var(--text-color);
     color: var(--terciary-color);
 }
 
